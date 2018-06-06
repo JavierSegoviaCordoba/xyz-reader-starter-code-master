@@ -1,0 +1,47 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:layout_gravity="top"
+        android:layout_marginLeft="@dimen/list_toolbar_side_margin"
+        android:layout_marginRight="@dimen/list_toolbar_side_margin"
+        android:background="?colorPrimary"
+        android:fitsSystemWindows="true"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/logo" />
+
+    </android.support.v7.widget.Toolbar>
+
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingBottom="28dp"
+            android:paddingLeft="@dimen/list_side_margin"
+            android:paddingRight="@dimen/list_side_margin"
+            android:paddingTop="8dp"
+            android:scrollbarStyle="outsideOverlay"
+            tools:listitem="@layout/list_item_article" />
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+</LinearLayout>
