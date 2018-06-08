@@ -10,5 +10,11 @@
     <dimen name="text_margin">16dp</dimen>
     <dimen name="dimen_16">16dp</dimen>
     <dimen name="fab_margin_bottom_navigation_bar">48dp</dimen>
+    <dimen name="meta_bar_magin_bottom">24dp</dimen>
+    <dimen name="margin_8">8dp</dimen>
+    <dimen name="margin_24">24dp</dimen>
+    <dimen name="card_elevation_2">2dp</dimen>
+    <dimen name="maxwidthlinearlayout_margin_top">234dp</dimen>
+    <dimen name="negative_margin_top">-32dp</dimen>
 
 </resources>

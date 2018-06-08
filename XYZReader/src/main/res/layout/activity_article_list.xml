@@ -9,11 +9,9 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
+        android:layout_height="?android:actionBarSize"
         android:layout_gravity="top"
-        android:layout_marginLeft="@dimen/list_toolbar_side_margin"
-        android:layout_marginRight="@dimen/list_toolbar_side_margin"
-        android:background="?colorPrimary"
+        android:background="?android:colorPrimary"
         android:fitsSystemWindows="true"
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
@@ -37,7 +35,9 @@
             android:layout_height="match_parent"
             android:clipToPadding="false"
             android:scrollbarStyle="outsideOverlay"
-            tools:listitem="@layout/list_item_article" />
+            tools:listitem="@layout/list_item_article"
+            tools:layoutManager="android.support.v7.widget.StaggeredGridLayoutManager"
+            tools:spanCount="3"/>
     </android.support.v4.widget.SwipeRefreshLayout>
 
 </LinearLayout>

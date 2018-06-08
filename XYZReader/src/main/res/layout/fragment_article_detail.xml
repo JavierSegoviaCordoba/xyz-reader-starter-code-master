@@ -14,12 +14,16 @@
         android:nestedScrollingEnabled="true"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <FrameLayout
+        <LinearLayout
+            android:gravity="center_horizontal"
+            android:layout_gravity="center_horizontal"
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fitsSystemWindows="false">
 
             <android.support.constraint.ConstraintLayout
+                android:visibility="visible"
                 android:id="@+id/photo_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -27,12 +31,13 @@
                 android:fitsSystemWindows="false">
                 <!--suppress AndroidLintContentDescription -->
                 <ImageView
+                    android:transitionName="thumbnail"
                     android:id="@+id/photo"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:fitsSystemWindows="false"
                     android:scaleType="centerCrop"
-                    app:layout_constraintDimensionRatio="16:9"
+                    app:layout_constraintDimensionRatio="@string/aspect_ratio"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -43,12 +48,13 @@
                     android:layout_height="0dp"
                     android:background="@drawable/photo_background_protection"
                     android:fitsSystemWindows="false"
-                    app:layout_constraintDimensionRatio="16:9"
+                    app:layout_constraintDimensionRatio="@string/aspect_ratio"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <LinearLayout
+                    android:layout_marginBottom="@dimen/meta_bar_magin_bottom"
                     android:id="@+id/meta_bar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -87,37 +93,50 @@
             </android.support.constraint.ConstraintLayout>
 
             <com.example.xyzreader.ui.MaxWidthLinearLayout
+                android:layout_marginTop="@dimen/negative_margin_top"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="234dp"
+                android:layout_height="wrap_content"
                 android:maxWidth="@dimen/detail_card_max_width"
                 android:orientation="vertical">
 
-                <TextView
-                    android:maxLines="10"
-                    android:visibility="visible"
-                    android:id="@+id/article_body"
-                    style="?android:attr/textAppearanceMedium"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/detail_inner_horiz_margin"
-                    android:layout_marginRight="@dimen/detail_inner_horiz_margin"
-                    android:lineSpacingMultiplier="@fraction/detail_body_line_spacing_multiplier"
-                    android:paddingBottom="@dimen/detail_body_bottom_margin"
-                    android:paddingTop="@dimen/detail_inner_horiz_margin"
-                    android:textColor="@color/primaryTextColor"
-                    android:textColorLink="@color/primaryDarkColor"
-                    android:textSize="@dimen/detail_body_text_size" />
+                <android.support.v7.widget.CardView
+                    android:layout_marginTop="@dimen/margin_8"
+                    android:layout_marginStart="@dimen/margin_8"
+                    android:layout_marginEnd="@dimen/margin_8"
+                    android:layout_marginBottom="@dimen/margin_24"
+                    app:cardElevation="@dimen/card_elevation_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <!--I added maxLines to avoid performance problems-->
+
+                    <TextView
+                        android:fontFamily="@font/rosario_regular"
+                        android:maxLines="100"
+                        android:visibility="visible"
+                        android:id="@+id/article_body"
+                        style="?android:attr/textAppearanceMedium"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/detail_inner_horiz_margin"
+                        android:layout_marginRight="@dimen/detail_inner_horiz_margin"
+                        android:lineSpacingMultiplier="@fraction/detail_body_line_spacing_multiplier"
+                        android:paddingBottom="@dimen/detail_body_bottom_margin"
+                        android:paddingTop="@dimen/detail_inner_horiz_margin"
+                        android:textColor="@color/primaryTextColor"
+                        android:textColorLink="@color/primaryDarkColor"
+                        android:textSize="@dimen/detail_body_text_size" />
+
+                </android.support.v7.widget.CardView>
 
             </com.example.xyzreader.ui.MaxWidthLinearLayout>
 
-        </FrameLayout>
+        </LinearLayout>
 
     </com.example.xyzreader.ui.ObservableScrollView>
 
     <android.support.design.widget.FloatingActionButton
-        android:layout_marginBottom="@dimen/fab_margin_bottom_navigation_bar"
+        app:rippleColor="@android:color/white"
         app:useCompatPadding="true"
         android:id="@+id/share_fab"
         android:layout_width="wrap_content"
@@ -126,6 +145,6 @@
         android:tint="@android:color/white"
         app:fabSize="normal"
         app:layout_anchorGravity="bottom|end"
-        app:srcCompat="@drawable/ic_share" />
+        app:srcCompat="@drawable/ic_share_white_24dp" />
 
 </com.example.xyzreader.ui.DrawInsetsFrameLayout>
