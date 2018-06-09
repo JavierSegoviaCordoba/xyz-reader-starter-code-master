@@ -87,9 +87,12 @@ public class ArticleListActivity extends AppCompatActivity implements
 
         onRefresh(this);
 
+        recyclerViewScrollSetup();
+    }
+
+    private void recyclerViewScrollSetup() {
         final AppBarLayout appBarLayout = findViewById(R.id.appBarLayout);
         final float elevation = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 4, getResources().getDisplayMetrics());
-
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
@@ -110,17 +113,18 @@ public class ArticleListActivity extends AppCompatActivity implements
 
     @Override
     public void onBackPressed() {
-        CoordinatorLayout coordinatorLayout = findViewById(R.id.coordinator);
-        Snackbar.make(coordinatorLayout, R.string.close_the_app, Snackbar.LENGTH_LONG)
-                .setAction(getResources().getString(R.string.close_label), new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        finish();
-                    }
-                })
-                .setActionTextColor(getResources().getColor(android.R.color.holo_red_light))
-                .show();
-        if (count == 1) {
+        if (count == 0){
+            CoordinatorLayout coordinatorLayout = findViewById(R.id.coordinator);
+            Snackbar.make(coordinatorLayout, R.string.close_the_app, Snackbar.LENGTH_LONG)
+                    .setAction(getResources().getString(R.string.close_label), new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            finish();
+                        }
+                    })
+                    .setActionTextColor(getResources().getColor(android.R.color.holo_red_light))
+                    .show();
+        } else {
             finish();
         }
         count = 1;
