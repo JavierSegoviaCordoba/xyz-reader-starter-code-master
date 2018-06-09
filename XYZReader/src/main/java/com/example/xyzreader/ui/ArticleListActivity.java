@@ -1,6 +1,6 @@
 package com.example.xyzreader.ui;
 
-import android.app.Activity;
+import android.animation.ValueAnimator;
 import android.app.LoaderManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -10,7 +10,10 @@ import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityOptionsCompat;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
+import android.support.v4.view.animation.FastOutLinearInInterpolator;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
@@ -18,6 +21,7 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.text.Html;
 import android.text.format.DateUtils;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -56,6 +60,8 @@ public class ArticleListActivity extends AppCompatActivity implements
     // Most time functions can only handle 1902 - 2037
     private GregorianCalendar START_OF_EPOCH = new GregorianCalendar(2, 1, 1);
 
+    int count = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,6 +77,44 @@ public class ArticleListActivity extends AppCompatActivity implements
         }
 
         onRefresh(this);
+
+        final AppBarLayout appBarLayout = findViewById(R.id.appBarLayout);
+        final float elevation = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 4, getResources().getDisplayMetrics());
+
+        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (recyclerView.canScrollVertically(-1)) {
+                    appBarLayout.setElevation(elevation);
+                } else {
+                    appBarLayout.setElevation(0);
+                }
+            }
+        });
+    }
+
+    @Override
+    public void onBackPressed() {
+        CoordinatorLayout coordinatorLayout = findViewById(R.id.coordinator);
+        Snackbar.make(coordinatorLayout, R.string.close_the_app, Snackbar.LENGTH_LONG)
+                .setAction(getResources().getString(R.string.close_label), new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        finish();
+                    }
+                })
+                .setActionTextColor(getResources().getColor(android.R.color.holo_red_light))
+                .show();
+        if (count == 1) {
+            finish();
+        }
+        count = 1;
     }
 
     private void onRefresh(final LoaderManager.LoaderCallbacks callbacks) {

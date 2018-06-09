@@ -10,5 +10,7 @@
     <string name="up">Up</string>
     <string name="aspect_ratio">16:9</string>
     <string name="image_thumbnail">Image thumbnail</string>
+    <string name="close_the_app">Press again to close the app</string>
+    <string name="close_label">Close</string>
 
 </resources>

@@ -1,33 +1,42 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinator"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    android:orientation="vertical">
+    tools:context=".ui.ArticleListActivity">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
-        android:layout_height="?android:actionBarSize"
-        android:layout_gravity="top"
-        android:background="?android:colorPrimary"
-        android:fitsSystemWindows="true"
-        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        android:layout_height="wrap_content">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:contentDescription="@string/app_name"
-            android:src="@drawable/logo" />
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?android:actionBarSize"
+            android:layout_gravity="top"
+            android:background="?android:colorPrimary"
+            app:layout_scrollFlags="scroll|enterAlways|snap"
+            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-    </android.support.v7.widget.Toolbar>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/logo" />
 
+        </android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
 
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swipe_refresh_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:ignore="PrivateResource">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_view"
@@ -35,9 +44,9 @@
             android:layout_height="match_parent"
             android:clipToPadding="false"
             android:scrollbarStyle="outsideOverlay"
-            tools:listitem="@layout/list_item_article"
             tools:layoutManager="android.support.v7.widget.StaggeredGridLayoutManager"
-            tools:spanCount="3"/>
+            tools:listitem="@layout/list_item_article"
+            tools:spanCount="3" />
     </android.support.v4.widget.SwipeRefreshLayout>
 
-</LinearLayout>
+</android.support.design.widget.CoordinatorLayout>
